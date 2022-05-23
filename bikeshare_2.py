@@ -131,7 +131,10 @@ def station_stats(df):
     print('Most Common End Station: ', most_common_end)
 
     # returns most frequent combination of start station and end station trip
-    common_trip = 'From ' + df['Start Station'] + " to " + df['End Station'].mode()[0]
+    start = df['Start Station'].mode()[0]
+    end = df['End Station'].mode()[0]
+    common_trip = start + '' + end
+
     print('Most Popular Start and End stations:', common_trip)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -184,14 +187,19 @@ def user_stats(df):
 
 # Asking if the user want show more data
 def ask_more_data(df):
-    more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
     start_loc = 0
-    while more_data == 'yes':
-        print(df.iloc[0:10])
-        start_loc += 10
-        more_data = input("Would you like to view 10 rows of data? Enter yes or no? ").lower()
+    more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
+    pd.set_option('display.max_columns', 200)
+    while True:
+        if more_data == 'no':
+            break
+        elif more_data == 'yes':
+            print(df.iloc[0:10])
+            more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
+            start_loc += 10
+        else:
+            more_data = input("Would you like to view 10 rows of data? Enter yes or no? ").lower()
 
-    return df
 
 
 def main():
