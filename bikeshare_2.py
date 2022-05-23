@@ -23,7 +23,7 @@ def get_filters():
     # ask the user to input city (chicago (ch), new york city (ny), washington(w)
     while True:
         city = input(
-            "please, pick a city to analyze:(ch) for chicago or (ny) for new_york_city or (w) for washington:\n").lower()
+            "Pick a city to analyze:(ch) for chicago or (ny) for new_york_city or (w) for washington:\n").lower()
         if city in CITY_DATA.keys():
             break
         else:
@@ -45,7 +45,7 @@ def get_filters():
     days = ["all", "mon", "tue", "wed", "thur", "fri", "sat", "sun"]
     while True:
         day = input(
-            "please, pick day of week(mon, tue, wed, thur, fri, sat, sun)to filter or all:\n").lower()
+            "Pick day of week(mon, tue, wed, thur, fri, sat, sun)to filter or all:\n").lower()
         if day in days:
             break
         else:
@@ -176,7 +176,7 @@ def user_stats(df):
         print('Most Common Birth Year: ', df['Birth Year'].mode()[0])
 
     except:
-        print('Sorry, we don\'t have data for Birth Year in Washington!')
+        print('Sorry, we don\'t have data for "Birth Year" in Washington!')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
