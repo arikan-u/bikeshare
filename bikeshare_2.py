@@ -131,8 +131,8 @@ def station_stats(df):
     print('Most Common End Station: ', most_common_end)
 
     # returns most frequent combination of start station and end station trip
-    common_trip = most_common_start + '' + most_common_end
-
+    df['Combo'] = df['Start Station'].astype(str) + ' - ' + df['End Station'].astype(str)
+    common_trip = df['Combo'].mode()[0]
     print('Most Popular Start and End stations:', common_trip)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -183,20 +183,21 @@ def user_stats(df):
     print('-' * 40)
 
 
-# Asking if the user want show more data
-def ask_more_data(df):
-    start_loc = 0
-    more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
-    pd.set_option('display.max_columns', 200)
-    while True:
-        if more_data == 'no':
-            break
-        elif more_data == 'yes':
-            print(df.iloc[0:10])
-            more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
-            start_loc += 10
-        else:
-            more_data = input("Would you like to view 10 rows of data? Enter yes or no? ").lower()
+# # Asking if the user want show more data
+# def ask_more_data(df):
+#     start_loc = 0
+#     more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
+#     pd.set_option('display.max_columns', 200)
+#     while True:
+#         if more_data == 'no':
+#             break
+#         elif more_data == 'yes':
+#             start_loc += 10
+#             print(df.iloc[0:10])
+#             more_data = input("Would you like to view 10 rows of data? yes or no? ").lower()
+#
+#         else:
+#             more_data = input("Would you like to view 10 rows of data? Enter yes or no? ").lower()
 
 
 
@@ -209,7 +210,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        ask_more_data(df)
+        # ask_more_data(df)
 
         restart = input('\nRestart? Enter yes or no.\n')
         if restart.lower() != 'yes':
